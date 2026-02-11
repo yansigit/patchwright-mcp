@@ -1,28 +1,22 @@
 {
-  "name": "@playwright/mcp",
+  "name": "patchwright-mcp",
   "version": "0.0.66",
-  "description": "Playwright Tools for MCP",
+  "description": "Patchwright (Patchright-based) Tools for MCP",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright-mcp.git"
+    "url": "git+https://github.com/user/patchwright-mcp.git"
   },
-  "homepage": "https://playwright.dev",
   "engines": {
     "node": ">=18"
-  },
-  "author": {
-    "name": "Microsoft Corporation"
   },
   "license": "Apache-2.0",
   "scripts": {
     "lint": "node update-readme.js",
     "test": "playwright test",
     "ctest": "playwright test --project=chrome",
-    "ftest": "playwright test --project=firefox",
-    "wtest": "playwright test --project=webkit",
     "dtest": "MCP_IN_DOCKER=1 playwright test --project=chromium-docker",
     "build": "echo OK",
-    "npm-publish": "npm run lint && npm run test && npm publish"
+    "postinstall": "node verify-patchright.js"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -32,10 +26,10 @@
     }
   },
   "dependencies": {
-    "playwright": "1.59.0-alpha-1770400094000",
-    "playwright-core": "1.59.0-alpha-1770400094000"
+    "patchright": "1.57.0",
+    "patchright-core": "1.57.0"
   },
   "bin": {
-    "playwright-mcp": "cli.js"
+    "patchwright-mcp": "cli.js"
   }
 }

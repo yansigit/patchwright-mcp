@@ -16,12 +16,12 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { chromium } from 'playwright';
+import { chromium } from 'patchright';
 import { spawn } from 'child_process';
 import { test as base, expect } from '../../playwright-mcp/tests/fixtures';
 
 import type { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import type { BrowserContext } from 'playwright';
+import type { BrowserContext } from 'patchright';
 import type { StartClient } from '../../playwright-mcp/tests/fixtures';
 
 type BrowserWithExtension = {
@@ -120,7 +120,7 @@ async function runCli(
     const testInfo = options.testInfo;
 
     // Path to the terminal CLI
-    const cliPath = path.join(__dirname, '../../../node_modules/playwright/lib/mcp/terminal/cli.js');
+    const cliPath = path.join(__dirname, '../../../node_modules/patchright/lib/mcp/terminal/cli.js');
 
     return new Promise<CliResult>((resolve, reject) => {
       let stdout = '';

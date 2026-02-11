@@ -1,20 +1,16 @@
 {
-  "name": "playwright-mcp-internal",
+  "name": "patchwright-mcp-internal",
   "version": "0.0.66",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright-mcp.git"
-  },
-  "homepage": "https://playwright.dev",
-  "author": {
-    "name": "Microsoft Corporation"
+    "url": "git+https://github.com/user/patchwright-mcp.git"
   },
   "license": "Apache-2.0",
   "scripts": {
-    "docker-build": "docker build --no-cache -t playwright-mcp-dev:latest .",
-    "docker-rm": "docker rm playwright-mcp-dev",
-    "docker-run": "docker run -it -p 8080:8080 --name playwright-mcp-dev playwright-mcp-dev:latest",
+    "docker-build": "docker build --no-cache -t patchwright-mcp-dev:latest .",
+    "docker-rm": "docker rm patchwright-mcp-dev",
+    "docker-run": "docker run -it -p 8080:8080 --name patchwright-mcp-dev patchwright-mcp-dev:latest",
     "lint": "npm run lint --workspaces",
     "test": "npm run test --workspaces",
     "build": "npm run build --workspaces",
@@ -26,7 +22,7 @@
   ],
   "devDependencies": {
     "@modelcontextprotocol/sdk": "^1.25.2",
-    "@playwright/test": "1.59.0-alpha-1770400094000",
+    "@playwright/test": "1.57.0",
     "@types/node": "^24.3.0"
   }
 }

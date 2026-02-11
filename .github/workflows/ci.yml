@@ -36,11 +36,11 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm ci
-    - name: Playwright install
-      run: npx playwright install --with-deps
+    - name: Patchright install
+      run: npx patchright install --with-deps chromium
     - name: Build
       run: npm run build
-    - name: Run playwright-mcp tests
+    - name: Run patchwright-mcp tests
       id: test-mcp
       run: npm run test --workspace=packages/playwright-mcp
       continue-on-error: true
@@ -64,14 +64,14 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm ci
-    - name: Playwright install
-      run: npx playwright install --with-deps chromium
+    - name: Patchright install
+      run: npx patchright install --with-deps chromium
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
-        tags: playwright-mcp-dev:latest
+        tags: patchwright-mcp-dev:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
         load: true

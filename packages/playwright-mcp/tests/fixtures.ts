@@ -16,7 +16,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { chromium } from 'playwright';
+import { chromium } from 'patchright';
 
 import { test as baseTest, expect as baseExpect } from '@playwright/test';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
@@ -25,7 +25,7 @@ import { ListRootsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { TestServer } from './testserver/index';
 
 import type { Config } from '../config';
-import type { BrowserContext } from 'playwright';
+import type { BrowserContext } from 'patchright';
 import type { Transport } from '@modelcontextprotocol/sdk/shared/transport.js';
 import type { Stream } from 'stream';
 
@@ -190,7 +190,7 @@ async function createTransport(args: string[], mcpMode: TestOptions['mcpMode'], 
     const dockerArgs = ['run', '--rm', '-i', '--network=host', '-v', `${test.info().project.outputDir}:/app/test-results`];
     const transport = new StdioClientTransport({
       command: 'docker',
-      args: [...dockerArgs, 'playwright-mcp-dev:latest', ...args],
+      args: [...dockerArgs, 'patchwright-mcp-dev:latest', ...args],
     });
     return {
       transport,

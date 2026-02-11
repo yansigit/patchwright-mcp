@@ -8,13 +8,18 @@ function copyConfig() {
   let content = fs.readFileSync(src, 'utf-8');
   content = content.replace(
     "import type * as playwright from 'playwright-core';",
-    "import type * as playwright from 'playwright';"
+    "import type * as playwright from 'patchright';"
+  );
+  // Restrict browserName to chromium only (patchright doesn't support firefox/webkit)
+  content = content.replace(
+    "browserName?: 'chromium' | 'firefox' | 'webkit'",
+    "browserName?: 'chromium'"
   );
   fs.writeFileSync(dst, content);
   console.log(`Copied config.d.ts from ${src} to ${dst}`);
 }
 
-function updatePlaywrightVersion(version) {
+function updatePatchrightVersion(version) {
   const packagesDir = path.join(__dirname, 'packages');
   const files = [path.join(__dirname, 'package.json')];
   for (const entry of fs.readdirSync(packagesDir, { withFileTypes: true })) {
@@ -27,7 +32,7 @@ function updatePlaywrightVersion(version) {
     const json = JSON.parse(fs.readFileSync(file, 'utf-8'));
     let updated = false;
     for (const section of ['dependencies', 'devDependencies']) {
-      for (const pkg of ['@playwright/test', 'playwright', 'playwright-core']) {
+      for (const pkg of ['@playwright/test', 'patchright', 'patchright-core']) {
         if (json[section]?.[pkg]) {
           json[section][pkg] = version;
           updated = true;
@@ -44,7 +49,7 @@ function updatePlaywrightVersion(version) {
 }
 
 function doRoll(version) {
-  updatePlaywrightVersion(version);
+  updatePatchrightVersion(version);
   copyConfig();
   // update readme
   execSync('npm run lint', { cwd: __dirname, stdio: 'inherit' });
@@ -52,7 +57,7 @@ function doRoll(version) {
 
 let version = process.argv[2];
 if (!version) {
-  version = execSync('npm info playwright@next version', { encoding: 'utf-8' }).trim();
-  console.log(`Using next playwright version: ${version}`);
+  version = execSync('npm info patchright@latest version', { encoding: 'utf-8' }).trim();
+  console.log(`Using latest patchright version: ${version}`);
 }
 doRoll(version);
